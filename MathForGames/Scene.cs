@@ -93,9 +93,12 @@ namespace MathForGames
             return actorRemoved;
         }
 
-        public void Start()
+        public virtual void Start()
         {
-
+            for (int i = 0; i < _actors.Length; i ++)
+            {
+                _actors[i].Start();
+            }
         }
 
         public void Update()

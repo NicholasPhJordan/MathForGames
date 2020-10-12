@@ -8,6 +8,8 @@ namespace MathForGames
     class Game
     {
         private static bool _gameOver = false;
+        private Scene _scene;
+
 
         //Static function used to set game over without an instance of game.
         public static void SetGameOver(bool value)
@@ -15,31 +17,46 @@ namespace MathForGames
             _gameOver = value;
         }
 
+        //return whether or not the specified ConsoleKey is pressed
+        public static bool CheckKey(ConsoleKey key)
+        {
+            if (Console.KeyAvailable)
+            {
+                if (Console.ReadKey(true).Key == key)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
-
+            _scene = new Scene();
+            Actor actor = new Actor();
+            _scene.AddActor(actor);
         }
 
 
         //Called every frame.
         public void Update()
         {
-
+            _scene.Update();
         }
 
         //Used to display objects and other info on the screen.
         public void Draw()
         {
-
+            Console.Clear();
+            _scene.Draw();
         }
 
 
         //Called when the game ends.
         public void End()
         {
-
+            _scene.End();
         }
 
 
@@ -52,6 +69,9 @@ namespace MathForGames
             {
                 Update();
                 Draw();
+                while (Console.KeyAvailable) 
+                    Console.ReadKey(true);
+                Thread.Sleep(50);
             }
 
             End();
