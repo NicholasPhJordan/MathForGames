@@ -6,44 +6,65 @@ namespace MathForGames
 {
     class Actor
     {
-        private char _icon = '#';
-        private int _x = 10;
-        private int _y = 5;
+        protected char _icon = '#';
+        protected Vector2 _position;
+        protected Vector2 _velocity;
+        protected ConsoleColor _color;
 
-        public void Start()
+        public Vector2 Position
         {
-
-        }
-
-        public void Update()
-        {
-            ConsoleKey keyPressed = Game.GetNextKey();
-            switch (keyPressed)
+            get
             {
-                case ConsoleKey.A:
-                    _x--;
-                    break;
-                case ConsoleKey.D:
-                    _x++;
-                    break;
-                case ConsoleKey.W:
-                    _y--;
-                    break;
-                case ConsoleKey.S:
-                    _y++;
-                    break;
+                return _position;
             }
-            _x = Math.Clamp(_x, 0, Console.WindowWidth-1);
-            _y = Math.Clamp(_y, 0, Console.WindowHeight-1);
+            set
+            {
+                _position = value;
+            }
         }
 
-        public void Draw()
+        public Vector2 Velocity
         {
-            Console.SetCursorPosition(_x, _y);
-            Console.Write(_icon);
+            get
+            {
+                return _velocity;
+            }
+            set
+            {
+                _velocity = value;
+            }
         }
 
-        public void End()
+        public Actor(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor)
+        {
+            _icon = icon;
+            _position = new Vector2(x, y);
+            _velocity = new Vecotr2();
+            _color = color;
+        }
+
+        public virtual void Start()
+        {
+
+        }
+
+        public virtual void Update()
+        {
+            _position.X += _velocity.X;
+            _position.Y += _velocity.Y;
+            _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth-1);
+            _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
+        }
+
+        public virtual void Draw()
+        {
+            Console.ForegroundColor = _color;
+            Console.SetCursorPosition((int)_position.X, (int)_position.Y);
+            Console.Write(_icon);
+            Console.ForegroundColor = Game.DefaultColor;
+        }
+
+        public virtual void End()
         {
 
         }

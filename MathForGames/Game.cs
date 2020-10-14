@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
+using MathLibrary;
 
 namespace MathForGames
 {
@@ -11,6 +12,7 @@ namespace MathForGames
         private static bool _gameOver = false;
         private Scene _scene;
 
+        public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;
 
         //Static function used to set game over without an instance of game.
         public static void SetGameOver(bool value)
@@ -33,8 +35,11 @@ namespace MathForGames
         {
             Console.CursorVisible = false;
             _scene = new Scene();
-            Actor actor = new Actor();
+            Actor actor = new Actor(0, 0, '■', ConsoleColor.Cyan);
+            Actor.Velocity.X = 1;
+            Player player = new Player(0, 1, '@', ConsoleColor.Red)
             _scene.AddActor(actor);
+            _scene.AddActor(player);
         }
 
 
