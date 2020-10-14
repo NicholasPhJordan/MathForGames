@@ -35,10 +35,9 @@ namespace MathForGames
         {
             Console.CursorVisible = false;
             _scene = new Scene();
-            Actor actor = new Actor(0, 0, '■', ConsoleColor.Cyan);
-            actor.Velocity.X = 1;
-            Player player = new Player(0, 1, '@', ConsoleColor.Red);
-            _scene.AddActor(actor);
+            Hole hole = new Hole(10, 13, '■', ConsoleColor.Red);
+            _scene.AddActor(hole);
+            Player player = new Player(2, 1, '@', ConsoleColor.Green);
             _scene.AddActor(player);
         }
 
