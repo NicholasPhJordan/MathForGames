@@ -6,8 +6,9 @@ namespace MathForGames
 {
     class Actor
     {
-        private char _icon = 'a';
-        private int _x = 0;
+        private char _icon = '#';
+        private int _x = 10;
+        private int _y = 5;
 
         public void Start()
         {
@@ -16,15 +17,29 @@ namespace MathForGames
 
         public void Update()
         {
-            if (Game.CheckKey(ConsoleKey.D))
-                _x++;
-            if (Game.CheckKey(ConsoleKey.A))
-                _x--;
+            ConsoleKey keyPressed = Game.GetNextKey();
+            switch (keyPressed)
+            {
+                case ConsoleKey.A:
+                    _x--;
+                    break;
+                case ConsoleKey.D:
+                    _x++;
+                    break;
+                case ConsoleKey.W:
+                    _y--;
+                    break;
+                case ConsoleKey.S:
+                    _y++;
+                    break;
+            }
+            _x = Math.Clamp(_x, 0, Console.WindowWidth-1);
+            _y = Math.Clamp(_y, 0, Console.WindowHeight-1);
         }
 
         public void Draw()
         {
-            Console.SetCursorPosition(_x, 0);
+            Console.SetCursorPosition(_x, _y);
             Console.Write(_icon);
         }
 

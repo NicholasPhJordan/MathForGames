@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace MathForGames
 {
@@ -17,22 +18,20 @@ namespace MathForGames
             _gameOver = value;
         }
 
-        //return whether or not the specified ConsoleKey is pressed
-        public static bool CheckKey(ConsoleKey key)
+        public static ConsoleKey GetNextKey()
         {
-            if (Console.KeyAvailable)
+            //if the user hasnt pressed a key return
+            if (!Console.KeyAvailable)
             {
-                if (Console.ReadKey(true).Key == key)
-                {
-                    return true;
-                }
+                return 0;
             }
-            return false;
+            return Console.ReadKey(true).Key;
         }
 
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
+            Console.CursorVisible = false;
             _scene = new Scene();
             Actor actor = new Actor();
             _scene.AddActor(actor);
@@ -71,7 +70,7 @@ namespace MathForGames
                 Draw();
                 while (Console.KeyAvailable) 
                     Console.ReadKey(true);
-                Thread.Sleep(50);
+                Thread.Sleep(150);
             }
 
             End();

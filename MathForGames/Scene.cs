@@ -23,7 +23,7 @@ namespace MathForGames
                 appendedArray[i] = _actors[i];
             }
             //set last value in new array to be the actor we want to add
-            appendedArray[_actors.Length + 1] = actor;
+            appendedArray[_actors.Length] = actor;
             //set old array to the values of the new array
             _actors = appendedArray;
         }
@@ -101,19 +101,28 @@ namespace MathForGames
             }
         }
 
-        public void Update()
+        public virtual void Update()
         {
-
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                _actors[i].Update();
+            }
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
-
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                _actors[i].Draw();
+            }
         }
 
-        public void End()
+        public virtual void End()
         {
-
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                _actors[i].End();
+            }
         }
     }
 }
