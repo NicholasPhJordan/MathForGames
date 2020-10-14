@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MathLibrary;
 
 namespace MathForGames
 {
@@ -35,11 +36,11 @@ namespace MathForGames
             }
         }
 
-        public Actor(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor)
+        public Actor(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
         {
             _icon = icon;
             _position = new Vector2(x, y);
-            _velocity = new Vecotr2();
+            _velocity = new Vector2();
             _color = color;
         }
 
