@@ -42,5 +42,22 @@ namespace MathLibrary
             _x = x;
             _y = y;
         }
+
+        public static Vector2 operator +(Vector2 lhs, Vector2 rhs)
+        {
+            float x = lhs.X + rhs.X;
+            float y = lhs.Y + rhs.Y;
+            return new Vector2(x, y);
+        }
+
+        public static Vector2 operator *(Vector2 lhs, float scalar)
+        {
+            return new Vector2(lhs.X * scalar, lhs.Y * scalar);
+        }
+
+        public float GetMagnitude()
+        {
+
+        }
     }
 }
