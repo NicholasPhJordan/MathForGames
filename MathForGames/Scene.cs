@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Transactions;
 
 namespace MathForGames
 {
     class Scene
     {
         private Actor[] _actors;
+
+        public bool Startred { get; private set; }
 
         public Scene()
         {
@@ -52,6 +55,8 @@ namespace MathForGames
                 else
                 {
                     actorRemoved = true;
+                    if (_actors[i].Started)
+                        _actors[i].End();
                 }
             }
             //set the old array to be the tempArray
@@ -85,6 +90,8 @@ namespace MathForGames
                 else
                 {
                     actorRemoved = true;
+                    if (actor.Started)
+                        actor.End();
                 }
             }
             //set the old array to be the tempArray
@@ -95,16 +102,16 @@ namespace MathForGames
 
         public virtual void Start()
         {
-            for (int i = 0; i < _actors.Length; i ++)
-            {
-                _actors[i].Start();
-            }
+            Startred = true;
         }
 
         public virtual void Update()
         {
             for (int i = 0; i < _actors.Length; i++)
             {
+                if (!_actors[i].Started)
+                    _actors[i].Start();
+
                 _actors[i].Update();
             }
         }
@@ -121,8 +128,11 @@ namespace MathForGames
         {
             for (int i = 0; i < _actors.Length; i++)
             {
-                _actors[i].End();
+                if (_actors[i].Started)
+                    _actors[i].End();
             }
+
+            Startred = false;
         }
     }
 }

@@ -57,7 +57,7 @@ namespace MathLibrary
 
         public float GetMagnitude()
         {
-
+            return (float)Math.Sqrt(X * X + Y * Y);
         }
     }
 }
