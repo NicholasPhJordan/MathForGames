@@ -27,7 +27,7 @@ namespace MathForGames
         { }
 
         public Player(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
-            : base(x, y, icon, color)
+            : base(x, y, rayColor, icon, color)
         { }
 
         public override void Update(float deltaTime)

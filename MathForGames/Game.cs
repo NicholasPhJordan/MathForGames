@@ -49,10 +49,11 @@ namespace MathForGames
                 tempArray[i] = _scenes[i];
             }
 
-            tempArray[_scenes.Length] = scene;
+            int index = _scenes.Length;
+            tempArray[index] = scene;
             _scenes = tempArray;
 
-            return _scenes.Length;
+            return index;
         }
 
         public static bool RemoveScene(Scene scene)
@@ -91,13 +92,14 @@ namespace MathForGames
             if (index < 0 || index >= _scenes.Length)
                 return;
 
+            if (_scenes[_currentSceneIndex].Startred)
+                _scenes[_currentSceneIndex].Start();
+
             _currentSceneIndex = index;
         }
 
         public static bool GetKeyDown(int key)
         {
-            bool testBool = true;
-            int test = Convert.ToInt32(testBool);
             return Raylib.IsKeyDown((KeyboardKey)key);
         }
 
@@ -126,19 +128,21 @@ namespace MathForGames
             Scene scene1 = new Scene();
             Scene scene2 = new Scene();
 
-            //creates new actors
+            //Creates two actors to add to our scene
             Actor actor = new Actor(0, 0, Color.GREEN, '■', ConsoleColor.Green);
             actor.Velocity.X = 1;
-            scene1.AddActor(actor);
-
-            Player player = new Player(2, 2, Color.BLUE, '@', ConsoleColor.Red);
-            scene1.AddActor(player);
-            player.Speed = 5;
 
             Entity entity = new Entity(10, 10, Color.GREEN, '■', ConsoleColor.Green);
-            scene2.AddActor(entity);
+            Player player = new Player(0, 1, Color.BLUE, '@', ConsoleColor.Red);
+            scene1.AddActor(player);
+            scene1.AddActor(actor);
+            scene1.AddActor(entity);
+
+            scene2.AddActor(player);
+            player.Speed = 5;
 
             int startingSceneIndex = 0;
+
             startingSceneIndex = AddScene(scene1);
             AddScene(scene2);
 

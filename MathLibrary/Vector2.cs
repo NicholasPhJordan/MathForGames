@@ -47,8 +47,22 @@ namespace MathLibrary
             }
         }
 
+
+
+        public Vector2()
+        {
+            _x = 0;
+            _y = 0;
+        }
+
+        public Vector2(float x, float y)
+        {
+            _x = x;
+            _y = y;
+        }
+
         /// <summary>
-        /// Returns the normalized version of the vector in.
+        /// Returns the normalized version of a the vector passed in.
         /// </summary>
         /// <param name="vector">The vector that will be normalized</param>
         /// <returns></returns>
@@ -71,18 +85,6 @@ namespace MathLibrary
             return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
         }
 
-        public Vector2()
-        {
-            _x = 0;
-            _y = 0;
-        }
-
-        public Vector2(float x, float y)
-        {
-            _x = x;
-            _y = y;
-        }
-
         public static Vector2 operator +(Vector2 lhs, Vector2 rhs)
         {
             return new Vector2(lhs.X + rhs.X, lhs.Y + rhs.Y);
@@ -102,6 +104,8 @@ namespace MathLibrary
         {
             return new Vector2(lhs.X / scalar, lhs.Y / scalar);
         }
+
+
 
     }
 }
