@@ -65,10 +65,10 @@ namespace MathForGames
 
         private void UpdateFacing()
         {
-            if (_velocity.Magnitude < 0)
+            if (_velocity.Magnitude <= 0)
                 return;
 
-            _facing = Velocity.Normalized;
+            Forward = Velocity.Normalized;
         }
 
         public virtual void Start()
@@ -86,7 +86,7 @@ namespace MathForGames
 
         public virtual void Draw()
         {
-            Raylib.DrawText(_icon.ToString(), (int)_position.X * 32, (int)_position.Y * 32, 32, _rayColor);
+            Raylib.DrawText(_icon.ToString(), (int)(_position.X * 32), (int)(_position.Y * 32), 32, _rayColor);
             Raylib.DrawLine(
                 (int)(Position.X * 32),
                 (int)(Position.Y * 32),

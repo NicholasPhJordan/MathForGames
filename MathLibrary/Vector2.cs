@@ -47,8 +47,6 @@ namespace MathLibrary
             }
         }
 
-
-
         public Vector2()
         {
             _x = 0;

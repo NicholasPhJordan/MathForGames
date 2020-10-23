@@ -28,14 +28,19 @@ namespace MathForGames
             _alertColor = Color.RED;
         }
 
-        public bool CheckTargetInSight()
+        public bool CheckTargetInSight(float maxAngle, float maxDistance)
         {
             if (Target == null)
                 return false;
 
-            Vector2 direction = Vector2.Normalize(Target.Position - Position);
+            //find vector reresenting distance between actor and target
+            Vector2 direction = Target.Position - Position;
+            //Get magnitude of the distance vector
+            float distance = direction.Magnitude;
+            //Use inverse cosine to find angle of dot product in radians 
+            float angle = (float)Math.Acos(Vector2.DotProduct(Forward, direction.Normalized));
 
-            if (Vector2.DotProduct(Forward, direction) > 0)
+            if (angle <= maxAngle && distance <= maxDistance)
                 return true;
 
             return false;
@@ -43,7 +48,7 @@ namespace MathForGames
 
         public override void Update(float deltaTime)
         {
-            if (CheckTargetInSight())
+            if (CheckTargetInSight(1.5f, 5))
             {
                 _rayColor = Color.RED;
             }
