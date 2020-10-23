@@ -8,7 +8,7 @@ namespace MathForGames
 {
     class Player : Actor
     {
-        private float _speed;
+        private float _speed = 1;
 
         public float Speed
         {
@@ -22,12 +22,12 @@ namespace MathForGames
             }
         }
 
-        public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White) 
+        public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, icon, color)
         { }
 
-        public Player(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White) 
-            : base(x,y,icon,color)
+        public Player(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
+            : base(x, y, icon, color)
         { }
 
         public override void Update(float deltaTime)

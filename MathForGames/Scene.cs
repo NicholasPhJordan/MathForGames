@@ -43,11 +43,11 @@ namespace MathForGames
             //creates varriable toa ccess tempArray index
             int j = 0;
             //copy values from old array to new
-            for (int i = 0; i < _actors.Length; i ++)
+            for (int i = 0; i < _actors.Length; i++)
             {
                 //if current index is not the index that needs to be removed, 
                 //add the value into the old array and increment j
-                if(i != index)
+                if (i != index)
                 {
                     tempArray[i] = _actors[i];
                     j++;
@@ -78,7 +78,7 @@ namespace MathForGames
             //creates varriable toa ccess tempArray index
             int j = 0;
             //copy values from old array to new
-            for (int i = 0; i < _actors.Length; i ++)
+            for (int i = 0; i < _actors.Length; i++)
             {
                 //if current index is not the index that needs to be removed, 
                 //add the value into the old array and increment j

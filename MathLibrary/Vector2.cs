@@ -52,13 +52,23 @@ namespace MathLibrary
         /// </summary>
         /// <param name="vector">The vector that will be normalized</param>
         /// <returns></returns>
-
         public static Vector2 Normalize(Vector2 vector)
         {
             if (vector.Magnitude == 0)
                 return new Vector2();
 
             return vector / vector.Magnitude;
+        }
+
+        /// <summary>
+        /// Returns the dot product of the two vectors given.
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <returns></returns>
+        public static float DotProduct(Vector2 lhs, Vector2 rhs)
+        {
+            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
         }
 
         public Vector2()

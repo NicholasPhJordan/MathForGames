@@ -124,20 +124,23 @@ namespace MathForGames
 
             //create new scene for our actors to exist in
             Scene scene1 = new Scene();
+            Scene scene2 = new Scene();
 
             //creates new actors
-            Entity entity
-
             Actor actor = new Actor(0, 0, Color.GREEN, '■', ConsoleColor.Green);
             actor.Velocity.X = 1;
             scene1.AddActor(actor);
 
-            Player player = new Player(2, 2, Color.RED, '@', ConsoleColor.Red);
+            Player player = new Player(2, 2, Color.BLUE, '@', ConsoleColor.Red);
             scene1.AddActor(player);
             player.Speed = 5;
 
+            Entity entity = new Entity(10, 10, Color.GREEN, '■', ConsoleColor.Green);
+            scene2.AddActor(entity);
+
             int startingSceneIndex = 0;
             startingSceneIndex = AddScene(scene1);
+            AddScene(scene2);
 
             SetCurrentScene(startingSceneIndex);
         }
@@ -168,7 +171,7 @@ namespace MathForGames
         //Called when the game ends.
         public void End()
         {
-           if (_scenes[_currentSceneIndex].Startred) 
+            if (_scenes[_currentSceneIndex].Startred)
                 _scenes[_currentSceneIndex].End();
         }
 
@@ -178,12 +181,12 @@ namespace MathForGames
         {
             Start();
 
-            while(!_gameOver && !Raylib.WindowShouldClose())
+            while (!_gameOver && !Raylib.WindowShouldClose())
             {
                 float deltaTime = Raylib.GetFrameTime();
                 Update(deltaTime);
                 Draw();
-                while (Console.KeyAvailable) 
+                while (Console.KeyAvailable)
                     Console.ReadKey(true);
             }
 

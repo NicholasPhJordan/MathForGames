@@ -13,9 +13,9 @@ namespace MathForGames
         private Color _alertColor;
 
         public Actor Target
-        { 
-            get { return _target; } 
-            set  { _target = value; } 
+        {
+            get { return _target; }
+            set { _target = value; }
         }
 
         public Entity(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Green)
@@ -25,7 +25,7 @@ namespace MathForGames
         public Entity(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.Green)
             : base(x, y, rayColor, icon, color)
         {
-            _alertColor = Color.BLUE;
+            _alertColor = Color.RED;
         }
 
         public bool CheckTargetInSight()

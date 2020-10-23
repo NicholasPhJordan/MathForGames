@@ -14,8 +14,8 @@ namespace MathForGames
         private Vector2 _facing;
         protected ConsoleColor _color;
         protected Color _rayColor;
-        
-        public bool Started { get; private set; } 
+
+        public bool Started { get; private set; }
 
         public Vector2 Forward
         {
@@ -49,7 +49,7 @@ namespace MathForGames
 
         public Actor(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
         {
-            _rayColor = Color.SKYBLUE;
+            _rayColor = Color.WHITE;
             _icon = icon;
             _position = new Vector2(x, y);
             _velocity = new Vector2();
@@ -80,18 +80,18 @@ namespace MathForGames
         {
             UpdateFacing();
             _position += _velocity * deltaTime;
-            _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth-1);
-            _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
+            _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth - 1);
+            _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight - 1);
         }
 
         public virtual void Draw()
         {
             Raylib.DrawText(_icon.ToString(), (int)_position.X * 32, (int)_position.Y * 32, 32, _rayColor);
             Raylib.DrawLine(
-                (int)(Position.X * 32), 
-                (int)(Position.Y * 32), 
-                (int)((Position.X + Forward.X) * 32), 
-                (int)((Position.Y + Forward.Y) * 32), 
+                (int)(Position.X * 32),
+                (int)(Position.Y * 32),
+                (int)((Position.X + Forward.X) * 32),
+                (int)((Position.Y + Forward.Y) * 32),
                 Color.WHITE
             );
 
