@@ -9,6 +9,7 @@ namespace MathForGames
     class Player : Actor
     {
         private float _speed = 1;
+        private Color _alertColor;
 
         public float Speed
         {
@@ -28,7 +29,9 @@ namespace MathForGames
 
         public Player(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, rayColor, icon, color)
-        { }
+        {
+            _alertColor = Color.RED;
+        }
 
         public override void Update(float deltaTime)
         {

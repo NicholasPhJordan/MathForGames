@@ -40,15 +40,26 @@ namespace MathForGames
             //Use inverse cosine to find angle of dot product in radians 
             float angle = (float)Math.Acos(Vector2.DotProduct(Forward, direction.Normalized));
 
+            // Draw partial circle
+            Raylib.DrawCircleSector(
+                new System.Numerics.Vector2(_position.X * 32, _position.Y * 32),
+                maxDistance * 32,
+                (int)((180 / Math.PI) * -maxAngle) + 90,
+                (int)((180 / Math.PI) * maxAngle) + 90,
+                10,
+                Color.GREEN);
+
             if (angle <= maxAngle && distance <= maxDistance)
+            {
                 return true;
+            }
 
             return false;
         }
 
         public override void Update(float deltaTime)
         {
-            if (CheckTargetInSight(1.5f, 5))
+            if (CheckTargetInSight(0.75f, 5))
             {
                 _rayColor = Color.RED;
             }
@@ -58,6 +69,13 @@ namespace MathForGames
             }
 
             base.Update(deltaTime);
+        }
+
+        public override void Draw()
+        {
+            
+
+            base.Draw();
         }
 
     }
