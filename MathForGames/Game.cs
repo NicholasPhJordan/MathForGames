@@ -92,7 +92,7 @@ namespace MathForGames
             if (index < 0 || index >= _scenes.Length)
                 return;
 
-            if (_scenes[_currentSceneIndex].Startred)
+            if (_scenes[_currentSceneIndex].Started)
                 _scenes[_currentSceneIndex].Start();
 
             _currentSceneIndex = index;
@@ -154,7 +154,7 @@ namespace MathForGames
         //Called every frame.
         public void Update(float deltaTime)
         {
-            if (!_scenes[_currentSceneIndex].Startred)
+            if (!_scenes[_currentSceneIndex].Started)
                 _scenes[_currentSceneIndex].Start();
 
             _scenes[_currentSceneIndex].Update(deltaTime);
@@ -176,7 +176,7 @@ namespace MathForGames
         //Called when the game ends.
         public void End()
         {
-            if (_scenes[_currentSceneIndex].Startred)
+            if (_scenes[_currentSceneIndex].Started)
                 _scenes[_currentSceneIndex].End();
         }
 

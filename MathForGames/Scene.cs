@@ -9,7 +9,7 @@ namespace MathForGames
     {
         private Actor[] _actors;
 
-        public bool Startred { get; private set; }
+        public bool Started { get; private set; }
 
         public Scene()
         {
@@ -102,7 +102,7 @@ namespace MathForGames
 
         public virtual void Start()
         {
-            Startred = true;
+            Started = true;
         }
 
         public virtual void Update(float deltaTime)
@@ -132,7 +132,7 @@ namespace MathForGames
                     _actors[i].End();
             }
 
-            Startred = false;
+            Started = false;
         }
     }
 }
