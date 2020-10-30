@@ -36,6 +36,11 @@ namespace MathForGames
             }
         }
 
+        //public Vector2 Scale
+        //{
+        //    get
+        //}
+
         public Vector2 Velocity
         {
             get
@@ -62,7 +67,8 @@ namespace MathForGames
         public Actor(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : this(x, y, icon, color)
         {
-            _rayColor = rayColor;
+                _transform = new Matrix3();
+                _rayColor = rayColor;
         }
 
         private void UpdateFacing()
