@@ -137,10 +137,14 @@ namespace MathForGames
             entity.Target = player;
             scene1.AddActor(player);
             scene1.AddActor(actor);
-            scene1.AddActor(entity);
 
+            //scene1.AddActor(entity);
             scene2.AddActor(player);
             player.Speed = 5;
+
+            player.SetTranslation(new Vector2(10, 10));
+            player.SetRotation(1.57f);
+            player.SetScale(2, 2);
 
             int startingSceneIndex = 0;
 
