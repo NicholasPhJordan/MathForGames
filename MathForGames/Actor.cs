@@ -20,6 +20,8 @@ namespace MathForGames
         protected Color _rayColor;
         protected Actor _parent;
         protected Actor[] _children = new Actor[0];
+        protected float _rotationAngle;
+        private float _collisionRadius;
 
         public bool Started { get; private set; }
 
@@ -28,7 +30,7 @@ namespace MathForGames
             get { return new Vector2(_localTransform.m11, _localTransform.m21); }
         }
 
-        public Vector2 WorlPosition
+        public Vector2 WorldPosition
         {
             get { return new Vector2(_globalTransform.m13, _globalTransform.m23); }
         }
@@ -60,6 +62,7 @@ namespace MathForGames
             _rayColor = Color.WHITE;
             _icon = icon;
             _localTransform = new Matrix3();
+            _globalTransform = new Matrix3();
             LocalPosition = new Vector2(x, y);
             _velocity = new Vector2();
             _color = color;
@@ -68,8 +71,9 @@ namespace MathForGames
         public Actor(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : this(x, y, icon, color)
         {
-                _localTransform = new Matrix3();
-                _rayColor = rayColor;
+            _localTransform = new Matrix3();
+            _globalTransform = new Matrix3();
+            _rayColor = rayColor;
         }
 
         public void AddChild(Actor child)
@@ -86,7 +90,7 @@ namespace MathForGames
             child._parent = this;
         }
 
-        public bool YeetusFetus(Actor child)
+        public bool RemoveChild(Actor child)
         {
             bool childRemoved = false;
 
@@ -114,6 +118,26 @@ namespace MathForGames
             return childRemoved;
         }
 
+        /// <summary>
+        /// checks to see if this actor overlaps another
+        /// </summary>
+        /// <param name="other">actor that this actor is checking collision against</param>
+        /// <returns></returns>
+        public bool CheckCollision(Actor other)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// called whenever collision occurs betweenthis actor and another
+        /// use to define game logic for this actors collision
+        /// </summary>
+        /// <param name="other"></param>
+        public virtual void OnCollision(Actor other)
+        {
+
+        }
+
         public void SetTranslation(Vector2 position)
         {
             _translation.m13 = position.X;
@@ -126,6 +150,12 @@ namespace MathForGames
             _rotation.m21 = -(float)Math.Sin(radians);
             _rotation.m12 = (float)Math.Sin(radians);
             _rotation.m22 = (float)Math.Cos(radians);
+        }
+
+        public void Rotate(float radians)
+        {
+            _rotationAngle += radians;
+            SetRotation(_rotationAngle);
         }
 
         public void SetScale(float x, float y)
@@ -154,14 +184,6 @@ namespace MathForGames
 
         public virtual void Draw()
         {
-            //Raylib.DrawText(_icon.ToString(), (int)(Position.X * 32), (int)(Position.Y * 32), 32, _rayColor);
-            //Raylib.DrawLine(
-            //    (int)(Position.X * 32),
-            //    (int)(Position.Y * 32),
-            //    (int)((Position.X + Forward.X) * 32),
-            //    (int)((Position.Y + Forward.Y) * 32),
-            //    Color.WHITE
-            //);
 
             Console.ForegroundColor = _color;
             Console.SetCursorPosition((int)LocalPosition.X, (int)LocalPosition.Y);

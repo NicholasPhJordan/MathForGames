@@ -12,6 +12,7 @@ namespace MathForGames
     {
         private static bool _gameOver = false;
         private static Scene[] _scenes;
+        private static Actor[] _actors;
         private static int _currentSceneIndex;
 
         public static int CurrentSceneIndex
@@ -116,44 +117,44 @@ namespace MathForGames
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
-            //creates new raylib window
+            //Creates a new window for raylib
             Raylib.InitWindow(1024, 760, "Math For Games");
             Raylib.SetTargetFPS(60);
 
             //Set up console window
             Console.CursorVisible = false;
-            Console.Title = "Math for Games";
+            Console.Title = "Math For Games";
 
-            //create new scene for our actors to exist in
+            //Create a new scene for our actors to exist in
             Scene scene1 = new Scene();
             Scene scene2 = new Scene();
 
-            //Creates two actors to add to our scene
+            //Create the actors to add to our scene
             Actor actor = new Actor(0, 0, Color.GREEN, '■', ConsoleColor.Green);
+            Entity enemy = new Entity(10, 10, Color.GREEN, '■', ConsoleColor.Green);
+            Player player = new Player(0, 1, Color.BLUE, '@', ConsoleColor.Red);
             actor.Velocity.X = 1;
-
-            Entity entity = new Entity(10, 10, Color.GREEN, '■', ConsoleColor.Green);
-            Player player = new Player(30, 10, Color.BLUE, '@', ConsoleColor.Red);
-            entity.Target = player;
+            enemy.Target = player;
+            player.Speed = 5;
+            player.SetTranslation(new Vector2(15, 10));
+            player.Rotate(1.57f);
+            player.SetScale(2, 2);
+            player.AddChild(enemy);
+            //Add actors to the scenes
             scene1.AddActor(player);
             scene1.AddActor(actor);
+            scene1.AddActor(enemy);
+            //scene1.AddActor(enemy);
+            //scene2.AddActor(player);
 
-            //scene1.AddActor(entity);
-            scene2.AddActor(player);
-            player.Speed = 5;
-
-            player.SetTranslation(new Vector2(10, 10));
-            player.SetRotation(1.57f);
-            player.SetScale(2, 2);
-
+            //Sets the starting scene index and adds the scenes to the scenes array
             int startingSceneIndex = 0;
-
             startingSceneIndex = AddScene(scene1);
             AddScene(scene2);
 
+            //Sets the current scene to be the starting scene index
             SetCurrentScene(startingSceneIndex);
         }
-
 
         //Called every frame.
         public void Update(float deltaTime)
