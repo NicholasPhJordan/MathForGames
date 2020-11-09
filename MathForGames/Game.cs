@@ -143,9 +143,7 @@ namespace MathForGames
             //Add actors to the scenes
             scene1.AddActor(player);
             scene1.AddActor(actor);
-            scene1.AddActor(enemy);
-            //scene1.AddActor(enemy);
-            //scene2.AddActor(player);
+            scene2.AddActor(player);
 
             //Sets the starting scene index and adds the scenes to the scenes array
             int startingSceneIndex = 0;

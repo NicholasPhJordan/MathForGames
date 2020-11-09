@@ -125,6 +125,8 @@ namespace MathForGames
         /// <returns></returns>
         public bool CheckCollision(Actor other)
         {
+            
+            
             return false;
         }
 
@@ -184,7 +186,6 @@ namespace MathForGames
 
         public virtual void Draw()
         {
-
             Console.ForegroundColor = _color;
             Console.SetCursorPosition((int)LocalPosition.X, (int)LocalPosition.Y);
             Console.Write(_icon);
