@@ -12,7 +12,6 @@ namespace MathForGames
     {
         private static bool _gameOver = false;
         private static Scene[] _scenes;
-        private static Actor[] _actors;
         private static int _currentSceneIndex;
 
         public static int CurrentSceneIndex
@@ -130,20 +129,22 @@ namespace MathForGames
             Scene scene2 = new Scene();
 
             //Create the actors to add to our scene
-            Actor actor = new Actor(0, 0, Color.GREEN, '■', ConsoleColor.Green);
-            Entity enemy = new Entity(10, 10, Color.GREEN, '■', ConsoleColor.Green);
+            Actor actor = new Actor(5, 5, Color.GREEN, '■', ConsoleColor.Green);
+            Entity enemy = new Entity(10, 5, Color.GREEN, '■', ConsoleColor.Green);
             Player player = new Player(0, 1, Color.BLUE, '@', ConsoleColor.Red);
-            actor.Velocity.X = 1;
+            //actor.Velocity.X = 1;
             enemy.Target = player;
             player.Speed = 5;
-            player.SetTranslation(new Vector2(15, 10));
-            player.Rotate(1.57f);
-            player.SetScale(2, 2);
+            player.SetTranslation(new Vector2(5, 5));
+            //player.Rotate(1.57f);
+            player.SetScale(1.5f, 1.5f);
             player.AddChild(enemy);
+
             //Add actors to the scenes
             scene1.AddActor(player);
-            scene1.AddActor(actor);
+            scene1.AddActor(enemy);
             scene2.AddActor(player);
+            scene2.AddActor(enemy);
 
             //Sets the starting scene index and adds the scenes to the scenes array
             int startingSceneIndex = 0;

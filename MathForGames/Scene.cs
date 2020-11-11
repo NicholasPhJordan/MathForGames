@@ -9,7 +9,7 @@ namespace MathForGames
     class Scene
     {
         private Actor[] _actors;
-        private Matrix3 _transform;
+        private Matrix3 _transform = new Matrix3();
 
         public Matrix3 World
         {

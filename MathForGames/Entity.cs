@@ -64,7 +64,7 @@ namespace MathForGames
             base.Update(deltaTime);
 
 
-            _sprite.Draw(_localTransform);
+            _sprite.Draw(_globalTransform);
         }
 
     }

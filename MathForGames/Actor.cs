@@ -12,7 +12,7 @@ namespace MathForGames
         protected char _icon = ' ';
         protected Vector2 _velocity;
         protected Matrix3 _globalTransform;
-        protected Matrix3 _localTransform;
+        protected Matrix3 _localTransform = new Matrix3();
         private Matrix3 _translation = new Matrix3();
         private Matrix3 _rotation = new Matrix3();
         private Matrix3 _scale = new Matrix3();
@@ -27,7 +27,15 @@ namespace MathForGames
 
         public Vector2 Forward
         {
-            get { return new Vector2(_localTransform.m11, _localTransform.m21); }
+            get
+            {
+                return new Vector2(_localTransform.m11, _localTransform.m21);
+            }
+            set
+            {
+                Vector2 lookPosition = LocalPosition + value.Normalized;
+                LookAt(lookPosition);
+            }
         }
 
         public Vector2 WorldPosition
@@ -72,7 +80,6 @@ namespace MathForGames
             : this(x, y, icon, color)
         {
             _localTransform = new Matrix3();
-            _globalTransform = new Matrix3();
             _rayColor = rayColor;
         }
 
@@ -142,35 +149,70 @@ namespace MathForGames
 
         public void SetTranslation(Vector2 position)
         {
-            _translation.m13 = position.X;
-            _translation.m23 = position.Y;
+            _translation = Matrix3.CreateTranslation(position);
         }
 
         public void SetRotation(float radians)
         {
-            _rotation.m11 = (float)Math.Cos(radians);
-            _rotation.m21 = -(float)Math.Sin(radians);
-            _rotation.m12 = (float)Math.Sin(radians);
-            _rotation.m22 = (float)Math.Cos(radians);
+            _rotation = Matrix3.CreateRotation(radians);
         }
 
         public void Rotate(float radians)
         {
-            _rotationAngle += radians;
-            SetRotation(_rotationAngle);
+            _rotation *= Matrix3.CreateRotation(radians);
+
         }
 
         public void SetScale(float x, float y)
         {
-            _scale.m11 = x;
-            _scale.m22 =  y;
+            _scale = Matrix3.CreateScale(new Vector2(x, y));
+        }
+
+        /// <summary>
+        /// Rotates the actor to face the given position
+        /// </summary>
+        /// <param name="position">The position the actor should be facing</param>
+        public void LookAt(Vector2 position)
+        {
+            //Find the direction that the actor should look in
+            Vector2 direction = (position - LocalPosition).Normalized;
+
+            //Use the dotproduct to find the angle the actor needs to rotate
+            float dotProd = Vector2.DotProduct(Forward, direction);
+            if (Math.Abs(dotProd) > 1)
+                return;
+            float angle = (float)Math.Acos(dotProd);
+
+            //Find a perpindicular vector to the direction
+            Vector2 perp = new Vector2(direction.Y, -direction.X);
+
+            //Find the dot product of the perpindicular vector and the current forward
+            float perpDot = Vector2.DotProduct(perp, Forward);
+
+            //If the result isn't 0, use it to change the sign of the angle to be either positive or negative
+            if (perpDot != 0)
+                angle *= -perpDot / Math.Abs(perpDot);
+
+            Rotate(angle);
         }
 
         private void UpdateTransform()
         {
             _localTransform = _translation * _rotation * _scale;
+
+            if (_parent != null)
+                _globalTransform = _parent._globalTransform * _localTransform;
+            else
+                _globalTransform = Game.GetCurrentScene().World * _localTransform;
         }
 
+        private void UpdateFacing()
+        {
+            if (_velocity.Magnitude <= 0)
+                return;
+            Forward = Velocity.Normalized;
+        }
+        
         public virtual void Start()
         {
             Started = true;
@@ -179,16 +221,30 @@ namespace MathForGames
         public virtual void Update(float deltaTime)
         {
             UpdateTransform();
+            //UpdateFacing();
             LocalPosition += _velocity * deltaTime;
-            LocalPosition.X = Math.Clamp(LocalPosition.X, 0, Console.WindowWidth - 1);
-            LocalPosition.Y = Math.Clamp(LocalPosition.Y, 0, Console.WindowHeight - 1);
         }
 
         public virtual void Draw()
         {
+            Raylib.DrawLine(
+                (int)(WorldPosition.X * 32),
+                (int)(WorldPosition.Y * 32),
+                (int)((WorldPosition.X + Forward.X) * 32),
+                (int)((WorldPosition.Y + Forward.Y) * 32),
+                Color.WHITE
+            );
+
             Console.ForegroundColor = _color;
-            Console.SetCursorPosition((int)LocalPosition.X, (int)LocalPosition.Y);
-            Console.Write(_icon);
+
+            //Only draws the actor on the console if it is within the bounds of the window
+            if (WorldPosition.X >= 0 && WorldPosition.X < Console.WindowWidth
+                && WorldPosition.Y >= 0 && WorldPosition.Y < Console.WindowHeight)
+            {
+                Console.SetCursorPosition((int)WorldPosition.X, (int)WorldPosition.Y);
+                Console.Write(_icon);
+            }
+
             Console.ForegroundColor = Game.DefaultColor;
         }
 
