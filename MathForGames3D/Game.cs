@@ -58,7 +58,7 @@ namespace MathForGames3D
         {
             Start();
 
-            while (!_gameOver)
+            while (!_gameOver && !Raylib.WindowShouldClose())
             {
                 Update();
                 Draw();
