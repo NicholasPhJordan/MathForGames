@@ -102,5 +102,12 @@ namespace MathLibrary
                     lhs.m31 * rhs.m13 + lhs.m32 * rhs.m23 + lhs.m33 * rhs.m33
                 );
         }
+
+        public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
+        {
+            return new Vector3(
+                
+                );
+        }
     }
 }

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathForGames", "MathForGame
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathLibrary", "MathLibrary\MathLibrary.csproj", "{C02A6151-BA97-4D6B-BEF2-8273177D0492}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathForGames3D", "MathForGames3D\MathForGames3D.csproj", "{436A07EF-9CEC-44BE-A33F-B66DE874804C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathForGames3D", "MathForGames3D\MathForGames3D.csproj", "{436A07EF-9CEC-44BE-A33F-B66DE874804C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{2731BE78-C467-4E92-9381-4F6B9EA68963}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{436A07EF-9CEC-44BE-A33F-B66DE874804C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{436A07EF-9CEC-44BE-A33F-B66DE874804C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{436A07EF-9CEC-44BE-A33F-B66DE874804C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2731BE78-C467-4E92-9381-4F6B9EA68963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2731BE78-C467-4E92-9381-4F6B9EA68963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2731BE78-C467-4E92-9381-4F6B9EA68963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2731BE78-C467-4E92-9381-4F6B9EA68963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

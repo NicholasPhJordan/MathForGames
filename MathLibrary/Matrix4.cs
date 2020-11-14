@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MathLibrary;
 
-namespace MathForGames3D
+namespace MathLibrary
 {
     public class Matrix4
     {
@@ -97,7 +96,7 @@ namespace MathForGames3D
 
         //Creates new matrix that hs been rotated by given radians across the X axis
         //radians = the angle the new matrix will be rotated
-        public static Matrix4 CreatRotationX(float radians)
+        public static Matrix4 CreateRotationX(float radians)
         {
             return new Matrix4(
                 1, 0, 0, 0,
@@ -148,6 +147,13 @@ namespace MathForGames3D
                 0, scale.Y, 0, 0,
                 0, 0, scale.Z , 0,
                 0, 0, 0, 1
+                );
+        }
+
+        public static Vector4 operator *(Matrix4 lhs, Vector4 rhs)
+        {
+            return new Vector4(
+
                 );
         }
     }
