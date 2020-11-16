@@ -97,5 +97,10 @@ namespace MathLibrary
         {
             return new Vector4(lhs.X / scalar, lhs.Y / scalar, lhs.Z / scalar, lhs.W / scalar);
         }
+
+        public static Vector4 CrossProduct(Vector4 lhs, Vector4 rhs)
+        {
+            return new Vector4();
+        }
     }
 }

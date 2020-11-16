@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MathLibrary\MathLibrary.csproj">
-      <Project>{c02a6151-ba97-4d6b-bef2-8273177d0492}</Project>
+      <Project>{5ac9c938-f2f8-4fd7-b0d5-76175f10f21b}</Project>
       <Name>MathLibrary</Name>
     </ProjectReference>
   </ItemGroup>

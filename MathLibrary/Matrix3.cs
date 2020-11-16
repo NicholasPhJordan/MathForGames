@@ -47,7 +47,7 @@ namespace MathLibrary
 
         //Creates new matrix that hs been rotated by given radians
         //radians = the angle the new matrix will be rotated
-        public static Matrix3  CreateRotation(float radians)
+        public static Matrix3 CreateRotation(float radians)
         {
             return new Matrix3(
                 (float)Math.Cos(radians), (float)Math.Sin(radians), 0,

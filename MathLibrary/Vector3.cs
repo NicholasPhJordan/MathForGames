@@ -90,6 +90,11 @@ namespace MathLibrary
         {
             return new Vector3(lhs.X / scalar, lhs.Y / scalar, lhs.Z / scalar);
         }
+
+        public static Vector3 CrossProduct(Vector3 lhs, Vector3 rhs)
+        {
+            return new Vector3();
+        }
     }
 }
 
