@@ -100,7 +100,12 @@ namespace MathLibrary
 
         public static Vector4 CrossProduct(Vector4 lhs, Vector4 rhs)
         {
-            return new Vector4();
+            return new Vector4(
+                lhs.Y * rhs.Z - lhs.Z * rhs.Y,
+                lhs.Z * rhs.X - lhs.X * rhs.Z,
+                lhs.X * rhs.Y - lhs.Y * rhs.X,
+                lhs.W * 0
+                );
         }
     }
 }
