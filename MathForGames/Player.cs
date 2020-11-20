@@ -43,8 +43,7 @@ namespace MathForGames
             int Vert = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_W))
                 + Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_S));
 
-            Velocity = new Vector2(Hori, Vert);
-            Velocity = Velocity.Normalized * Speed;
+            Acceleration = new Vector2(Hori, Vert);
 
             base.Update(deltaTime);
         }
